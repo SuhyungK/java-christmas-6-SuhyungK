@@ -10,4 +10,8 @@ public class Customer {
         this.date = date;
         this.orderMenu = orderMenu;
     }
+
+    public static Customer of(int date, Map<String, Integer> orderMenu) {
+        return new Customer(date, orderMenu);
+    }
 }
