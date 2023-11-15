@@ -1,6 +1,10 @@
 package christmas.view;
 
 import christmas.domain.CustomerResult;
+import christmas.utils.MenuList;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class OutputView {
     CustomerResult result;
@@ -28,23 +32,39 @@ public class OutputView {
         System.out.printf("%,d원\n\n", result.totalOrderAmount);
     }
 
-    public void printGiveaway() {
-        System.out.println("<증정 목록>");
+    public String printGiveaway() {
+        System.out.println("<증정 메뉴>");
         System.out.println(result.printGiveaway() + "\n");
+        return null;
     }
 
-    public void printBenefit() {
+    public String printBenefit() {
         System.out.println("<혜택 내역>");
-        System.out.println("크리스마스 디데이 할인: -");
-        System.out.println("평일 할인: -");
-        System.out.println("특별 할인: -");
-        System.out.println("증정 이벤트: -");
-
-        System.out.println("\n<총혜택 금액>");
+        if (result.discounts.values().stream().mapToInt(i -> i).sum() == 0) {
+            return printDefault("0원\n");
+        }
+        result.discounts.forEach((discountType, price) -> {
+            if (price != 0) System.out.printf("%s: -%,d원\n", discountType, price);
+        });
+        System.out.println();
+        return null;
     }
 
-    public void printPaymentAmount() {
+    public String printTotalBenefitAmount() {
+        System.out.println("<총혜택 금액>");
+        if (result.totalBenefitAmount == 0) {
+            return printDefault("0원\n");
+        }
+        System.out.printf("-%,d원\n\n", result.totalBenefitAmount);
+        return null;
+    }
+    public String printPaymentAmount() {
         System.out.println("<할인 후 예상 결제 금액>");
+        if (result.paymentAmount == 0) {
+            return printDefault("0원");
+        }
+        System.out.printf("%,d원\n\n", result.paymentAmount);
+        return null;
     }
 
     public void printEventBadge() {
@@ -52,5 +72,8 @@ public class OutputView {
         System.out.println(result.badge);
     }
 
-
+    private static String printDefault(String defaultValue) {
+        System.out.println(defaultValue);
+        return null;
+    }
 }
