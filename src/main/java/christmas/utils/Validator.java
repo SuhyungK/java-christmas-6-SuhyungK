@@ -10,7 +10,7 @@ import java.util.Set;
 public class Validator {
 
     public static void isNumber(String data) {
-        if (data.matches("\\d+")) {
+        if (!data.matches("\\d+")) {
             throw new IllegalArgumentException();
         }
     }
