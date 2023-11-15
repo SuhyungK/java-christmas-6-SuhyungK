@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.utils.MenuType;
+import christmas.constants.DiscountInfo;
 
 import java.time.LocalDate;
 
@@ -14,19 +14,19 @@ public class DateDiscount {
 
 
     public static int getDDayDiscount(int date) {
-        if (date > EventInfo.DDAY_END_DATE.getDate()) {
+        if (date > EventInfo.DDAY_END_DATE.getNumber()) {
             return 0;
         }
         return DDAY_START_AMOUNT + --date * DDAY_UNIT_AMOUNT;
 
     }
 
-    public static MenuType getDiscountMenuType(int date) {
+    public static DiscountInfo getWeekInfo(int date) {
         int weekNumber = getWeekNumber(date);
         if (weekNumber == 5 || weekNumber == 6) {
-            return MenuType.메인;
+            return DiscountInfo.주말;
         }
-        return MenuType.디저트;
+        return DiscountInfo.평일;
     }
 
     public static int getSpecialDiscount(int date) {
