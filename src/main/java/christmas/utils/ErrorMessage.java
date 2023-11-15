@@ -6,6 +6,6 @@ public enum ErrorMessage {
 
     @Override
     public String toString() {
-        return "[ERROR] 유효하지 않은 " + name() + "입니. 다시 입력해 주세요\n";
+        return "[ERROR] 유효하지 않은 " + name() + "입니다. 다시 입력해 주세요\n";
     }
 }
