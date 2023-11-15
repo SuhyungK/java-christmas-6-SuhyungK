@@ -40,6 +40,6 @@ public enum MenuList {
                      .filter(menu -> menu.name()
                                          .equals(value))
                      .findFirst()
-                     .orElseThrow();
+                     .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.주문.toString()));
     }
 }
