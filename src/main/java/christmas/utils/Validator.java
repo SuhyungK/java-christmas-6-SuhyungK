@@ -16,7 +16,7 @@ public class Validator {
     }
 
     public static void isValidDate(int data) {
-        if (data < EventInfo.START_DATE.getDate() || data > EventInfo.END_DATE.getDate()) {
+        if (data < EventInfo.START_DATE.getNumber() || data > EventInfo.END_DATE.getNumber()) {
             throw new IllegalArgumentException();
         }
     }
@@ -44,6 +44,19 @@ public class Validator {
 
     public static void isDuplicatedMenu(HashMap<String, Integer> map, Map.Entry<String, Integer> entry) {
         if (map.containsKey(entry.getKey())) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static void isMinimumMenuCount(Map<MenuType, Integer> menuTypeList) {
+        if (menuTypeList.values().stream().mapToInt(i -> i).sum() > EventInfo.MINIMUM_MENU_COUNT.getNumber()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static void notOnlyBeverage(Map<MenuType, Integer> menuTypeList) {
+        Set<MenuType> menutypes = menuTypeList.keySet();
+        if (menutypes.size() == 1 && menutypes.contains(MenuType.음료)) {
             throw new IllegalArgumentException();
         }
     }
