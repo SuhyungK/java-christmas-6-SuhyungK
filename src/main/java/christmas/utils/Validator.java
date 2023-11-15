@@ -60,4 +60,10 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void isNotEmpty(String data) {
+        if (data.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

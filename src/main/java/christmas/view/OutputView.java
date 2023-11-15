@@ -41,7 +41,7 @@ public class OutputView {
     public String printBenefit() {
         System.out.println("<혜택 내역>");
         if (result.discounts.values().stream().mapToInt(i -> i).sum() == 0) {
-            return printDefault("0원\n");
+            return printDefault("없음\n");
         }
         result.discounts.forEach((discountType, price) -> {
             if (price != 0) System.out.printf("%s: -%,d원\n", discountType, price);

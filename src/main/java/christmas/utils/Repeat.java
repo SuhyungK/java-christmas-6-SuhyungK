@@ -9,6 +9,7 @@ public class Repeat {
     public static int readDataHandler(Supplier<String> supplier) {
         try {
             String data = supplier.get();
+            Validator.isNotEmpty(data);
             Validator.isNumber(data);
             Validator.isValidDate(Integer.parseInt(data));
             return Integer.parseInt(data);
@@ -21,6 +22,7 @@ public class Repeat {
     public static Map<String, Integer> readMenuHandler(Supplier<String> supplier) {
         try {
             String data = supplier.get();
+            Validator.isNotEmpty(data);
             return Arrays.stream(data.split(","))
                          .map(each -> {
                              String[] order = each.split("-");
