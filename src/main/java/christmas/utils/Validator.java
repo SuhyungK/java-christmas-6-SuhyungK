@@ -3,6 +3,9 @@ package christmas.utils;
 import christmas.domain.EventInfo;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Validator {
 
@@ -39,4 +42,9 @@ public class Validator {
         }
     }
 
+    public static void isDuplicatedMenu(HashMap<String, Integer> map, Map.Entry<String, Integer> entry) {
+        if (map.containsKey(entry.getKey())) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

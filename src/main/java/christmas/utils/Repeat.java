@@ -30,11 +30,14 @@ public class Repeat {
                              return Map.entry(order[0], Integer.parseInt(order[1]));
                          })
                          .collect(HashMap::new,
-                                 (map, entry) ->
-                                         map.put(entry.getKey(), entry.getValue()), HashMap::putAll);
+                                 (map, entry) -> {
+                                    Validator.isDuplicatedMenu(map, entry);
+                                    map.put(entry.getKey(), entry.getValue());
+                                 },
+                                 HashMap::putAll);
         } catch (IllegalArgumentException e) {
             System.out.println(ErrorMessage.주문);
-            return readMenuHandler(supplier);
+            return new HashMap<>();
         }
     }
 }
