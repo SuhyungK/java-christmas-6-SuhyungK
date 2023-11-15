@@ -1,20 +1,11 @@
 package christmas.utils;
 
 public enum ErrorMessage {
-    NOT_VALID_DATE("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-
-    private final String message;
-
-    ErrorMessage(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+    날짜,
+    주문;
 
     @Override
     public String toString() {
-        return "[ERROR] " + message;
+        return "[ERROR] 유효하지 않은 " + name() + "입니. 다시 입력해 주세요\n";
     }
 }
