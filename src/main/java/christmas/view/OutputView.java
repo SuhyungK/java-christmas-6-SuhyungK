@@ -19,16 +19,18 @@ public class OutputView {
 
     public void printMenu() {
         System.out.println("<주문 메뉴>");
-        result.customer.orderMenu.forEach((key, value) -> System.out.println(key + " " + value + "개\n"));
+        result.customer.orderMenu.forEach((key, value) -> System.out.println(key + " " + value + "개"));
+        System.out.println();
     }
 
     public void printTotalOrderAmount() {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(result.totalOrderAmount + "원\n");
+        System.out.printf("%,d원\n\n", result.totalOrderAmount);
     }
 
     public void printGiveaway() {
-//        if (result.giveaway.getType() == "없음")
+        System.out.println("<증정 목록>");
+        System.out.println(result.printGiveaway() + "\n");
     }
 
     public void printBenefit() {
