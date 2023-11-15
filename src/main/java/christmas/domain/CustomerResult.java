@@ -3,6 +3,9 @@ package christmas.domain;
 import christmas.utils.MenuList;
 import christmas.utils.MenuType;
 
+import java.awt.*;
+import java.util.Map;
+
 import static christmas.domain.DateDiscount.*;
 
 public class CustomerResult {
@@ -11,6 +14,7 @@ public class CustomerResult {
     public int totalBenefitAmount; // 할인 금액의 합계
     public MenuList giveaway; // 증정품
     public EventBadge badge; // 이벤트 배지
+    private Map<MenuType, Integer> menuTypeList;
 
     public CustomerResult(Customer customer) {
         this.customer = customer;
@@ -27,8 +31,12 @@ public class CustomerResult {
     public int calculateTotalAmount() {
         return customer.orderMenu.entrySet()
                                  .stream()
-                                 .mapToInt(i -> MenuList.fromString(i.getKey())
-                                                        .getPrice() * i.getValue())
+                                 .mapToInt(i -> {
+                                     MenuList menu = MenuList.fromString(i.getKey());
+                                     menuTypeList.put(menu.getType(), i.getValue());
+                                     return menu
+                                             .getPrice() * i.getValue();
+                                 })
                                  .sum();
     }
 
