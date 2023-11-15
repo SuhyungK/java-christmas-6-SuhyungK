@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public enum EventBadge {
-    SANTA(benefitAmount -> benefitAmount >= 20_000),
-    TREE(benefitAmount -> benefitAmount >= 10_000),
-    STAR(benefitAmount -> benefitAmount >= 5_000),
-    NOTHING(benefitAmount -> benefitAmount < 5_000);
+    산타(benefitAmount -> benefitAmount >= 20_000),
+    트리(benefitAmount -> benefitAmount >= 10_000),
+    별(benefitAmount -> benefitAmount >= 5_000),
+    없음(benefitAmount -> benefitAmount < 5_000);
 
     private final Predicate<Integer> find;
 
@@ -19,6 +19,6 @@ public enum EventBadge {
         return Arrays.stream(EventBadge.values())
                      .filter(badge -> badge.find.test(benefitAmount))
                      .findFirst()
-                     .orElse(NOTHING);
+                     .orElse(없음);
     }
 }
