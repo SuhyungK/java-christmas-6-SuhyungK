@@ -1,7 +1,8 @@
 package christmas.utils;
 
-import static christmas.utils.MenuType.*;
+import java.util.Arrays;
 
+import static christmas.utils.MenuType.*;
 
 public enum MenuList {
     양송이수프(에피타이저, 6_000),
@@ -15,7 +16,8 @@ public enum MenuList {
     아이스크립(디저트, 5_000),
     제로콜라(음료, 3_000),
     레드와인(음료, 60_000),
-    샴페인(음료, 25_000);
+    샴페인(음료, 25_000),
+    없음(MenuType.없음, 0);
 
     private final MenuType type;
     private final int price;
@@ -31,5 +33,13 @@ public enum MenuList {
 
     public int getPrice() {
         return price;
+    }
+
+    public static MenuList fromString(String value) {
+        return Arrays.stream(MenuList.values())
+                     .filter(menu -> menu.name()
+                                         .equals(value))
+                     .findFirst()
+                     .orElseThrow();
     }
 }
