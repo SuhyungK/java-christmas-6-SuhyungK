@@ -6,36 +6,36 @@ import christmas.utils.MenuType;
 import static christmas.domain.DateDiscount.*;
 
 public class CustomerResult {
-    Customer customer;
-    int totalOrderAmount; // 할인 전 총주문 금액
-    int totalBenefitAmount; // 할인 금액의 합계
-    MenuList giveaway; // 증정품
-    EventBadge badge; // 이벤트 배지
+    public Customer customer;
+    public int totalOrderAmount; // 할인 전 총주문 금액
+    public int totalBenefitAmount; // 할인 금액의 합계
+    public MenuList giveaway; // 증정품
+    public EventBadge badge; // 이벤트 배지
 
-    public CustomerResult() {
+    public CustomerResult(Customer customer) {
+        this.customer = customer;
         this.totalOrderAmount = calculateTotalAmount();
         this.giveaway = getGiveaway();
         this.totalBenefitAmount = calculateDiscountAmount();
         this.badge = getBadge();
     }
 
-    public CustomerResult of(Customer customer) {
-        this.customer = customer;
-        return new CustomerResult();
+    public static CustomerResult of(Customer customer) {
+        return new CustomerResult(customer);
     }
 
     public int calculateTotalAmount() {
-        return customer.orderMenu.keySet()
+        return customer.orderMenu.entrySet()
                                  .stream()
-                                 .mapToInt(i -> MenuList.fromString(i)
-                                                        .getPrice())
-                                 .sum() + giveaway.getPrice();
+                                 .mapToInt(i -> MenuList.fromString(i.getKey())
+                                                        .getPrice() * i.getValue())
+                                 .sum();
     }
 
     public int calculateDiscountAmount() {
         return getDDayDiscount(customer.date)
                 + getSpecialDiscount(customer.date)
-                + calculateWeekDayDiscountAmount(getDiscountMenuType(customer.date));
+                + calculateWeekDayDiscountAmount(getDiscountMenuType(customer.date)) + giveaway.getPrice();
     }
 
     private int calculateWeekDayDiscountAmount(MenuType type) {
