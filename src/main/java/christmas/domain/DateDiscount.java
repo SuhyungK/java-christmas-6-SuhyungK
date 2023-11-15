@@ -30,7 +30,7 @@ public class DateDiscount {
     }
 
     public static int getSpecialDiscount(int date) {
-        if (getWeekNumber(date) == 6 || date == SPECIAL_DATE) {
+        if (getWeekNumber(date) == 7 || date == SPECIAL_DATE) {
             return SPECIAL_UNIT_AMOUNT;
         }
         return 0;
